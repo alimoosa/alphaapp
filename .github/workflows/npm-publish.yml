@@ -19,6 +19,11 @@ jobs:
       - name: Create a file - Job 1
         run: echo "Job1 file" > job1.txt
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: job1-file
+          path: job1.txt
+
 
   job2:
     name: My Name is Job2
@@ -30,10 +35,23 @@ jobs:
       - name: Verify the File - Job 2
         run: ls -l job2.txt
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: job2-file
+          path: job2.txt
+
   job3:
     name: My Name is Job3
     runs-on: ubuntu-latest
     needs: [Job1, Job2]
     steps:
-      - name: Verify the File - Job 3
+      - name: before the download - Job 3
         run: ls -l
+      
+      - name: download the Job 1 file
+        uses: actions/download-artifact@v4
+        
+
+      - name: job1=file
+        run: ls -l
+      
