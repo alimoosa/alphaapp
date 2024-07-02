@@ -43,5 +43,5 @@ jobs:
         run: |
           netlify deploy --prod \
             --dir=out \
-            --site ${( secrets.NELIFY_SITE_ID )} \
-            --auth ${( secrets.NELIFY_API_TOKEN )}
+            --site ${{ secrets.NELIFY_SITE_ID }} \
+            --auth ${{ secrets.NELIFY_API_TOKEN }}
